@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Literacy Game - Allocate Money</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://calculator.me/img/budget.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+    }
+    .input-container {
+      margin-bottom: 20px;
+    }
+    input[type="number"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 150px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .droppable {
+      width: 120px;
+      height: 100px;
+      background-color: lightgray;
+      margin: 20px;
+      display: inline-block;
+      vertical-align: top;
+      border-radius: 5px;
+      line-height: 100px;
+      font-size: 18px;
+      border: 2px solid #ccc;
+      padding: 5px;
+      text-align: center;
+    }
+    .draggable {
+      width: 80px;
+      height: 50px;
+      background-color: gold;
+      margin: 10px auto;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 50px;
+      border: 1px solid #333;
+      display: inline-block;
+    }
+    .success-message {
+      color: green;
+      font-size: 18px;
+      margin-top: 30px;
+      padding: 10px;
+      border: 2px solid #00cc00;
+      border-radius: 5px;
+      display: none;
+      background-color: #e0ffe0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Allocate Your Money</h2>
+    <p> 1)<b>Cover all needs:</b>
+       Think about  how much each scenario ( groceries,gifts,emergencies) requires.
+      2) Select your amount,then drag it to the scenario.
+      3) <b>Keep balance</b>: Spend fund  evenly so you don't  overspend.
+      Use these quick steps to stay on budget!.</p>
+
+    <!-- Input and Create Draggable Button -->
+    <div class="input-container">
+      <input type="number" id="moneyInput" placeholder="Enter amount" />
+      <button id="addMoneyBtn">Add Money</button>
+    </div>
+
+    <!-- Droppable areas -->
+    <div class="droppable" id="groceries">Groceries</div>
+    <div class="droppable" id="shopping">Shopping</div>
+    <div class="droppable" id="savings">Savings</div>
+
+    <!-- Area to display draggable money elements -->
+    <div id="moneyContainer"></div>
+
+    <!-- Success message -->
+    <div class="success-message" id="successMessage">
+      You have successfully allocated your money!
+    </div>
+  </div>
+
+  <script>
+    const moneyContainer = document.getElementById('moneyContainer');
+    const addMoneyBtn = document.getElementById('addMoneyBtn');
+    const moneyInput = document.getElementById('moneyInput');
+    const droppables = document.querySelectorAll('.droppable');
+    const successMessage = document.getElementById('successMessage');
+
+    let totalMoneyAllocated = 0;
+    let groceryAllocation = 0; // Variable to track allocation for groceries
+
+    // Function to create draggable money elements
+    addMoneyBtn.addEventListener('click', function() {
+      const amount = moneyInput.value;
+      if (amount && amount > 0) {
+        // Create a draggable element for the entered amount
+        let draggable = document.createElement('div');
+        draggable.classList.add('draggable');
+        draggable.setAttribute('draggable', 'true');
+        draggable.innerHTML = `<span>RS ${amount}</span>`;
+
+        // Add dragstart event to draggable element
+        draggable.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('text', amount); // Pass the amount during drag
+        });
+
+        // Append draggable element to the money container
+        moneyContainer.appendChild(draggable);
+
+        // Clear input after adding
+        moneyInput.value = '';
+      } else {
+        alert('Please enter a valid amount');
+      }
+    });
+
+    // Set up droppable areas
+    droppables.forEach(droppable => {
+      droppable.addEventListener('dragover', (e) => {
+        e.preventDefault(); // Allow dropping
+      });
+
+      droppable.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const data = e.dataTransfer.getData('text');
+        droppable.innerHTML += `<br>RS ${data}`;
+        totalMoneyAllocated += parseInt(data); // Track allocated amount
+
+        // Track grocery allocation separately
+        if (droppable.id === 'groceries') {
+          groceryAllocation += parseInt(data); // Add to groceries
+        }
+
+        // Remove the draggable element after allocation
+        const draggedElement = document.querySelector('.draggable');
+        if (draggedElement) {
+          draggedElement.remove(); // Remove the dragged element
+        }
+
+        // Check if the allocation is correct
+        if (totalMoneyAllocated === 15000) {
+          successMessage.style.display = 'block';
+
+          // Save grocery allocation to localStorage
+          localStorage.setItem('groceryBudget', groceryAllocation);
+          localStorage.setItem('groceryAllocated', groceryAllocation);
+
+          // Redirect to the 4th scenario page after 2 seconds
+          setTimeout(function() {
+            window.location.href = 'fourth-scenario.html';
+          }, 2000);
+        } else if (totalMoneyAllocated > 15000 ) {
+          alert('You exceeded Rs 15,000. Please reallocate within the budget.');
+          location.reload(); // Reset the page for reallocation
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

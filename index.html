@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Literacy Game - Welcome</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      background-image: url('https://www.thespruce.com/thmb/0yPUS_juz8lzA4jyI8I5MRd3ol8=/1784x1286/filters:no_upscale():max_bytes(150000):strip_icc()/Living-room-with-traditional-details-58c0ad323df78c353c16f913.png'); /* Replace with your image URL */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    #coin {
+      width: 100px;
+      height: 100px;
+      background-image: url('https://th.bing.com/th/id/OIP.c34axntAFbRS9Y_jfUA8YAHaHa?rs=1&pid=ImgDetMain'); /* Replace with coin image */
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin: 20px auto;
+      animation: spin 2s linear infinite; /* Animation for coin spinning */
+      display: none;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .notification {
+      display: none; /* Hide notification initially */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Welcome to the Financial Literacy Game</h1>
+    <button id="loginBtn">Log in</button>
+
+    <!-- Coin animation -->
+    <div id="coin"></div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+      <p>,<b>RS 15000</b> has been credited to your account!</p>
+    </div>
+  </div>
+
+  <script>
+    // Handle login and display animation
+    document.getElementById('loginBtn').addEventListener('click', function() {
+      var coin = document.getElementById('coin');
+      coin.style.display = 'block'; // Show coin
+
+      // Save initial amount in localStorage
+      localStorage.setItem('totalPurse', 15000);
+
+      // Simulate delay for showing notification
+      setTimeout(function() {
+        coin.style.display = 'none'; // Hide coin after animation
+        document.getElementById('notification').style.display = 'block'; // Show notification
+        // Redirect to next page after 2 seconds
+        setTimeout(function() {
+          window.location.href = 'scenarios.html'; // Change to the actual next page URL
+        }, 3000);
+      }, 3000); // Animation for 2 seconds
+    });
+  </script>
+
+</body>
+</html>

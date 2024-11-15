@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Literacy Game - Shopping Scenario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      background-image: url('https://static.vecteezy.com/system/resources/previews/007/014/473/original/modern-shopping-mall-building-background-illustration-with-exterior-and-various-shops-inside-in-flat-style-design-vector.jpg'); /* Replace with your image URL */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 500px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Shopping Scenario</h1>
+    <p>You came across a reminder that your friend's birthday is just two days away. He/She had invited you last week to his/her birthday party, and you had promised to attend. You can’t show up empty-handed. You want to get something thoughtful, something that your friend will appreciate and remember.</p>
+    <p>You know he/she has been talking about wanting a new dress for a while, so you decide that would make the perfect gift.</p>
+    
+    <button id="nextScenarioBtn">Proceed to Shopping</button>
+  </div>
+
+  <script>
+    document.getElementById('nextScenarioBtn').addEventListener('click', function() {
+      window.location.href = 'shopping_mall.html'; // Adjust the URL as needed for the next page
+    });
+  </script>
+
+</body>
+</html>

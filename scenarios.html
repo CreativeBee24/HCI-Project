@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Literacy Game - Scenarios</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://www.thespruce.com/thmb/0yPUS_juz8lzA4jyI8I5MRd3ol8=/1784x1286/filters:no_upscale():max_bytes(150000):strip_icc()/Living-room-with-traditional-details-58c0ad323df78c353c16f913.png'); /* Use a suitable background image */
+      background-size: cover; /* Adjust this to 'contain' if you want to avoid cropping */
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 700px;
+      width: 100%;
+    }
+    .scenario {
+      margin-bottom: 20px;
+    }
+    .scenario h2 {
+      font-size: 22px;
+      color: #333;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>You are going to Face these 2 scenarios in the later stage of the game. Read them carefully</h1>
+
+    <!-- SCENARIO 1 -->
+    <div class="scenario">
+      <h2>SCENARIO 1:</h2>
+      <p>6 Guests are visiting your place. They will have lunch at your home. You need to buy groceries to prepare lunch for 10 people.</p>
+    </div>
+
+    <!-- SCENARIO 2 -->
+    <div class="scenario">
+      <h2>SCENARIO 2:</h2>
+      <p>Your friend's birthday is after 2 days. He/she has invited you to his/her place for the birthday party. You need to buy a present for your friend.</p>
+    </div>
+
+    <button id="nextBtn">Proceed to Allocate Money</button>
+  </div>
+
+  <script>
+    // Redirect to the next money allocation page when the student clicks 'Proceed'
+    document.getElementById('nextBtn').addEventListener('click', function() {
+      window.location.href = 'allocation-scenarios.html'; // Make sure to create 'allocation-scenarios.html' for the next step
+    });
+  </script>
+
+</body>
+</html>

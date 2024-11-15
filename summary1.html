@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Literacy Game - Summary</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      background-image: url('https://cdnl.iconscout.com/lottie/premium/preview/planning-budget-8597268-6800021.png?f=webp'); /* Replace with your image URL */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333333;
+      margin-bottom: 20px;
+    }
+
+    .summary-section p {
+      font-size: 18px;
+      color: #555555;
+      margin: 10px 0;
+    }
+
+    .summary-section strong {
+      color: #007bff;
+    }
+
+    .remaining {
+      font-size: 20px;
+      margin: 20px 0;
+    }
+
+    .remaining .success {
+      color: #28a745;
+    }
+
+    .remaining .error {
+      color: #dc3545;
+    }
+
+    #nextScenarioBtn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #nextScenarioBtn:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Summary</h1>
+
+    <div class="summary-section">
+      <p>Planned Budget for Groceries: <strong>RS <span id="plannedBudget">0</span></strong></p>
+      <p>Amount Spent on Groceries: <strong>RS <span id="spentAmount">0</span></strong></p>
+    </div>
+
+    <div class="remaining">
+      Remaining Purse Balance: <span id="remainingBalance">0</span>
+    </div>
+
+    <button id="nextScenarioBtn">Proceed to Next Scenario</button>
+  </div>
+
+  <script>
+    // Get values from localStorage or set defaults
+    const plannedBudget = parseInt(localStorage.getItem('groceryAllocated')) || 0; // Retrieve allocated budget from localStorage
+    const spentAmount = parseInt(localStorage.getItem('grocerySpent')) || 0; // Retrieve spent amount from localStorage
+    const totalPurse = 15000; // Total amount credited from the first scenario
+
+    // Display the planned budget and spent amount
+    document.getElementById('plannedBudget').innerText = plannedBudget;
+    document.getElementById('spentAmount').innerText = spentAmount;
+
+    // Calculate remaining balance
+    let remainingBalance = totalPurse - spentAmount;
+
+    // Debugging: Log the values to the console
+    console.log(`Planned Budget: ${plannedBudget}, Spent Amount: ${spentAmount}, Remaining Balance (before adjustment): ${remainingBalance}`);
+
+    // If underspent, add remaining budget to purse, else deduct overspending
+    if (spentAmount <= plannedBudget) {
+      document.getElementById('remainingBalance').innerHTML = `<span class="success">RS ${remainingBalance}</span>`;
+    } else {
+      remainingBalance = totalPurse - spentAmount;
+      document.getElementById('remainingBalance').innerHTML = `<span class="error">RS ${remainingBalance} (You overspent!)</span>`;
+    }
+
+    // Store updated purse value in localStorage for future scenarios
+    localStorage.setItem('remainingPurse', remainingBalance);
+
+    // Proceed to next scenario button logic
+    document.getElementById('nextScenarioBtn').addEventListener('click', function() {
+      window.location.href = 'fifth-scenario.html'; // Change this to the actual file name for the next scenario
+    });
+  </script>
+
+</body>
+</html>

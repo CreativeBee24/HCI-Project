@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Literacy Game - 4th Scenario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://imageio.forbes.com/specials-images/imageserve/836782690/0x0.jpg?format=jpg&width=1200'); /* A background image of a kitchen or grocery store */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 700px;
+      width: 100%;
+      position: relative; /* Ensures the container is above the background */
+      z-index: 1; /* Brings the container above other content */
+    }
+    h1 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Scenario 1: Grocery Planning</h1>
+    <p>
+      You are playing the role of a host who is expecting 6 guests and needs to prepare a lunch. 
+      You need to ensure there is enough food for 15 people in total (the 6 guests, yourself, and 3 family members). 
+      You will enter a virtual grocery store where you must plan to buy the list of ingredients needed for lunch. 
+      You must consider the cost of items such as pizza, Biryani, burger, drinks, and any desserts. 
+      You will also need to decide the quantity of each ingredient that will be needed for 15 people.
+    </p>
+    
+    <button id="nextBtn">Proceed to Grocery Store</button>
+  </div>
+
+  <script>
+    // Redirect to the grocery store page when the student clicks 'Proceed'
+    document.getElementById('nextBtn').addEventListener('click', function() {
+      window.location.href = 'grocery-store.html'; // This should point to the actual path of your 5th page
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grocery Store - Budget Shopping</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MXxzZWFyY2h8M3x8Z3JvY2VyeSUyMHN0b3JlfHwwfHx8fDE2MTk4MDIxNzg&ixlib=rb-1.2.1&q=80&w=1080');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 800px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .item img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+    label {
+      font-size: 18px;
+      margin-right: 10px;
+      flex: 1;
+      text-align: left;
+    }
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Grocery Store: Buy Ready-Made Foods</h1>
+    <p>You have allocated <strong>RS <span id="allocatedAmount">0</span></strong> for groceries. Choose your items wisely!</p>
+    <p>Each item quantity below is per guest (for 15 guests in total).</p>
+
+    <!-- Ready-made food items with suggested quantities, prices, and icons -->
+    <div class="item">
+      <img src="https://static.vecteezy.com/system/resources/previews/000/553/486/original/pizza-slice-vector-icon.jpg" alt="Pizza Icon">
+      <label for="pizza">Pizza (Rs 200 per piece, can be eaten by 1 person):</label>
+      <input type="number" id="pizza" value="0">
+    </div>
+
+    <div class="item">
+      <img src="https://static.vecteezy.com/system/resources/previews/015/677/818/non_2x/chicken-biryani-icon-a-dish-of-indian-and-arabic-cuisine-illustration-in-flat-style-vector.jpg" alt="Chicken Biryani Icon">
+      <label for="chickenBiryani">Chicken Biryani (Rs 250 per plate, can be eaten by 1 person):</label>
+      <input type="number" id="chickenBiryani" value="0">
+    </div>
+
+    <div class="item">
+      <img src="https://www.pngitem.com/pimgs/m/15-152900_mutton-biryani2-mutton-biryani-top-view-hd-png.png" alt="Mutton Biryani Icon">
+      <label for="muttonBiryani">Mutton Biryani (Rs 350 per plate, can be eaten by 2 people):</label>
+      <input type="number" id="muttonBiryani" value="0">
+    </div>
+
+    <div class="item">
+      <img src="https://th.bing.com/th/id/R.2094c32c9d1056908271fe2918c78396?rik=75iHOTZxIjrGBw&riu=http%3a%2f%2ficons.iconarchive.com%2ficons%2fgoogle%2fnoto-emoji-food-drink%2f1024%2f32382-hamburger-icon.png&ehk=4OigKhOe85ttdPH8jcGrXjW3DP3k9FBj0%2bOwMEgwcU0%3d&risl=&pid=ImgRaw&r=0" alt="Burger Icon">
+      <label for="burger">Burger (Rs 150 per piece, can be eaten by 1 person):</label>
+      <input type="number" id="burger" value="0">
+    </div>
+
+    <div class="item">
+      <img src="https://cdn4.vectorstock.com/i/1000x1000/28/93/noodles-black-icon-food-for-delicious-cuisine-vector-27832893.jpg" alt="Noodles Icon">
+      <label for="noodles">Noodles (Rs 120 per plate, can be eaten by 1 person):</label>
+      <input type="number" id="noodles" value="0">
+    </div>
+
+    <div class="item">
+      <img src="https://th.bing.com/th/id/OIP.q5b6hGTZvkVNh7O_Il-VwQHaGQ?rs=1&pid=ImgDetMain" alt="Pasta Icon">
+      <label for="pasta">Pasta (Rs 180 per plate, sufficient for 1):</label>
+      <input type="number" id="pasta" value="0">
+    </div>
+
+    <div class="item">
+      <img src="https://static.vecteezy.com/system/resources/previews/025/730/082/original/cold-drinks-icon-in-illustration-vector.jpg" alt="Cold Drinks Icon">
+      <label for="coldDrinks">Cold Drinks (Rs 50 per bottle):</label>
+      <input type="number" id="coldDrinks" value="0">
+    </div>
+
+    <div class="item">
+      <img src="https://th.bing.com/th/id/OIP.cNBeYr-2wknw3rKbhLp7TQHaHa?rs=1&pid=ImgDetMain" alt="Ice Cream Icon">
+      <label for="iceCream">Ice Cream (Rs 60 per scoop):</label>
+      <input type="number" id="iceCream" value="0">
+    </div>
+
+    <button id="checkoutBtn">Checkout</button>
+
+    <div class="result" id="resultMessage"></div>
+  </div>
+
+  <script>
+    const itemPrices = {
+      pizza: 200,
+      chickenBiryani: 250,
+      muttonBiryani: 350,
+      burger: 150,
+      noodles: 120,
+      pasta: 180,
+      coldDrinks: 50,
+      iceCream: 60
+    };
+
+    const budget = parseInt(localStorage.getItem('groceryBudget')) || 0; // Default to 0 if no budget is found
+    document.getElementById('allocatedAmount').innerText = budget;
+
+    const calculateTotal = () => {
+      let total = 0;
+      for (let item in itemPrices) {
+        const quantity = document.getElementById(item).value || 0;
+        total += itemPrices[item] * quantity;
+      }
+      return total;
+    };
+
+    document.getElementById('checkoutBtn').addEventListener('click', function() {
+      const totalSpent = calculateTotal();
+      localStorage.setItem('grocerySpent', totalSpent);
+
+      if (totalSpent <= budget) {
+        document.getElementById('resultMessage').innerHTML = `<p style="color:green;">Success! You've spent RS ${totalSpent}. Well done, you're within budget!</p>`;
+      } else {
+        document.getElementById('resultMessage').innerHTML = `<p style="color:red;">You overspent! Your total is RS ${totalSpent}. Please adjust your items to fit within your budget of RS ${budget}.</p>`;
+      }
+
+      setTimeout(function() {
+        window.location.href = 'summary1.html'; // Change this to your summary page's file name
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>

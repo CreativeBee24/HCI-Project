@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Literacy Game - Shopping Summary</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+      background-image: url('https://cdnl.iconscout.com/lottie/premium/preview/planning-budget-8597268-6800021.png?f=webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333333;
+      margin-bottom: 20px;
+    }
+
+    .summary-section p {
+      font-size: 18px;
+      color: #555555;
+      margin: 10px 0;
+    }
+
+    .summary-section strong {
+      color: #007bff;
+    }
+
+    .remaining {
+      font-size: 20px;
+      margin: 20px 0;
+    }
+
+    .remaining .success {
+      color: #28a745;
+    }
+
+    .remaining .error {
+      color: #dc3545;
+    }
+
+    #nextBtn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #nextBtn:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Shopping Summary</h1>
+
+    <div class="summary-section">
+      <p>Remaining Purse from Groceries: <strong>RS <span id="remainingFromGrocery">0</span></strong></p>
+      <p>Amount Spent on Shopping: <strong>RS <span id="spentShopping">0</span></strong></p>
+    </div>
+
+    <div class="remaining">
+      Final Savings: <span id="finalSavings">0</span>
+    </div>
+
+    <button id="nextBtn">Next</button>
+  </div>
+
+  <script>
+    // Get values from localStorage
+    const remainingFromGrocery = parseInt(localStorage.getItem('remainingPurse')) || 0; // Remaining from grocery scenario
+    const spentOnShopping = parseInt(localStorage.getItem('totalCost')) || 0; // Spent in the shopping mall
+
+    // Display values on the summary page
+    document.getElementById('remainingFromGrocery').innerText = remainingFromGrocery;
+    document.getElementById('spentShopping').innerText = spentOnShopping;
+
+    // Calculate the final savings after shopping
+    let finalSavings = remainingFromGrocery - spentOnShopping;
+
+    // Display final savings
+    if (finalSavings >= 0) {
+      document.getElementById('finalSavings').innerHTML = `<span class="success">RS ${finalSavings}</span>`;
+    } else {
+      document.getElementById('finalSavings').innerHTML = `<span class="error">RS ${finalSavings} (Overspent!)</span>`;
+    }
+
+    // Store the final savings in localStorage for future use
+    localStorage.setItem('finalSavings', finalSavings);
+
+    // Next button logic
+    document.getElementById('nextBtn').addEventListener('click', function() {
+      window.location.href = 'final-scenario.html'; // Redirect to the final scenario page
+    });
+  </script>
+
+</body>
+</html>

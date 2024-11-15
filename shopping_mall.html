@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Literacy Game - Shopping</title>
+  <style>
+    /* General Body Styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      background-image: url('https://static.vecteezy.com/system/resources/previews/012/104/189/original/group-of-color-shopping-bags-isolated-png.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: left;
+      align-items: last baseline;
+      height: 100vh;
+    }
+
+    /* Heading Styling */
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* Item Container */
+    .item-container {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      gap: 30px;
+      width: 80%;
+      max-width: 1200px;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    /* Individual Item Card Styling */
+    .item {
+      background-color: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      width: 180px;
+    }
+
+    /* Image Styling and Hover Effect */
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Text Styling */
+    h3 {
+      font-size: 1.2rem;
+      color: #444;
+      margin: 10px 0;
+    }
+
+    /* Total Cost Styling */
+    .total-cost {
+      font-size: 1.9rem;
+      color: #1b1f23;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    /* Button Styling and Hover Effect */
+    button.buy-btn, #checkoutBtn, #undoBtn {
+      padding: 8px 12px;
+      margin-top: 10px;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button.buy-btn {
+      background-color: #28a745;
+    }
+
+    button.buy-btn:hover {
+      background-color: #218838;
+    }
+
+    #checkoutBtn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      font-size: 20px;
+      background-color: #007bff;
+    }
+
+    #checkoutBtn:hover {
+      background-color: #0056b3;
+    }
+
+    #undoBtn {
+      background-color: #2724ce;
+      position: absolute;
+      bottom: 70px;
+      right: 20px;
+    }
+
+    #undoBtn:hover {
+      background-color: #cc523b;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      img {
+        width: 120px;
+        height: 120px;
+      }
+
+      .item-container {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Select Your Items</h1>
+
+    <div class="item-container">
+      <div class="item">
+        <h3>Shirts</h3>
+        <img id="shirtImg" src="https://www.sarfsports.com/upload/products/567795112_152_pic_3.jpg" alt="Shirt">
+        <select id="shirtSelect" onchange="updateImage('shirtSelect', 'shirtImg')">
+          <option value="low" data-cost="500" data-img="https://www.sarfsports.com/upload/products/567795112_152_pic_3.jpg">Low Quality - RS 500</option>
+          <option value="medium" data-cost="1000" data-img="https://images-na.ssl-images-amazon.com/images/I/41Ti+OqV58L.jpg">Medium Quality - RS 1000</option>
+          <option value="high" data-cost="1500" data-img="https://th.bing.com/th/id/OIP.fgyyu_2MXo_S82HTjEvGCgHaJo?rs=1&pid=ImgDetMain">High Quality - RS 1500</option>
+        </select>
+        <button class="buy-btn" onclick="addItem('shirtSelect')">Buy It</button>
+      </div>
+
+      <!-- Additional items are similar to the Shirts item above -->
+      <div class="item">
+        <h3>Pants</h3>
+        <img id="pantImg" src="https://images.only.com/15208415/3449713/001/only-pantswithsidepockets-black.jpg?v=509a0569278e327721fd1a21964609a8&format=webp&width=1280&quality=90&key=25-0-3" alt="Pant">
+        <select id="pantSelect" onchange="updateImage('pantSelect', 'pantImg')">
+          <option value="low" data-cost="700" data-img="https://images.only.com/15208415/3449713/001/only-pantswithsidepockets-black.jpg?v=509a0569278e327721fd1a21964609a8&format=webp&width=1280&quality=90&key=25-0-3">Low Quality - RS 700</option>
+          <option value="medium" data-cost="1200" data-img="https://th.bing.com/th/id/OIP.Fe0Xl2_CaGml9vKwlSR1UQHaHa?rs=1&pid=ImgDetMain">Medium Quality - RS 1200</option>
+          <option value="high" data-cost="1800" data-img="https://static1.reviewthisimages.com/wordpress/wp-content/uploads/2020/09/Nautica-jeans-1.jpg">High Quality - RS 1800</option>
+        </select>
+        <button class="buy-btn" onclick="addItem('pantSelect')">Buy It</button>
+      </div>
+
+
+      <div class="item">
+        <h3>Dresses</h3>
+        <img id="dressImg" src="https://th.bing.com/th/id/OIP.W7vuNX5AZepxY0d39xvl9AHaJ2?rs=1&pid=ImgDetMain" alt="Dress">
+        <select id="dressSelect" onchange="updateImage('dressSelect', 'dressImg')">
+          <option value="low" data-cost="800" data-img="https://th.bing.com/th/id/OIP.W7vuNX5AZepxY0d39xvl9AHaJ2?rs=1&pid=ImgDetMain">Low Quality - RS 800</option>
+          <option value="medium" data-cost="1300" data-img="https://th.bing.com/th/id/OIP.7gYqd_Ev1FpunSyJndLW7gAAAA?rs=1&pid=ImgDetMain">Medium Quality - RS 1300</option>
+          <option value="high" data-cost="2000" data-img="https://th.bing.com/th/id/R.19698f48d375bc2f10bb895a486a62c0?rik=mGIE5bL6BYkkGw&riu=http%3a%2f%2fcdn.shopify.com%2fs%2ffiles%2f1%2f1233%2f6964%2fproducts%2fred_sleeveless_chiffon_prom_dresses_1200x1200.jpg%3fv%3d1540889604&ehk=TkrDfEZswvRgwgcjmFWS19%2fc8bVyl4oVYeVzUfN017I%3d&risl=&pid=ImgRaw&r=0">High Quality - RS 2000</option>
+        </select>
+        <button class="buy-btn" onclick="addItem('dressSelect')">Buy It</button>
+      </div>
+
+      <div class="item">
+        <h3>Watches</h3>
+        <img id="watchImg" src="https://th.bing.com/th/id/OIP.r7fKS_tX5sL6ugPOWYUw5gHaHa?rs=1&pid=ImgDetMain" alt="Watch">
+        <select id="watchSelect" onchange="updateImage('watchSelect', 'watchImg')">
+          <option value="low" data-cost="1000" data-img="https://th.bing.com/th/id/OIP.r7fKS_tX5sL6ugPOWYUw5gHaHa?rs=1&pid=ImgDetMain">Low Quality - RS 1000</option>
+          <option value="medium" data-cost="1600" data-img="https://th.bing.com/th/id/OIP.UJUFBmC6xIWHxWYoyOQjQQHaHa?rs=1&pid=ImgDetMain">Medium Quality - RS 1600</option>
+          <option value="high" data-cost="2500" data-img="https://th.bing.com/th/id/OIP.EFuLtUuVPRxc6Kaij86UqQHaHa?rs=1&pid=ImgDetMain">High Quality - RS 2500</option>
+        </select>
+        <button class="buy-btn" onclick="addItem('watchSelect')">Buy It</button>
+      </div>
+
+      <div class="item">
+        <h3>Perfumes</h3>
+        <img id="perfumeImg" src="https://th.bing.com/th/id/OIP.TxWKUXkkUc8cCk1BGQxNcQHaHa?rs=1&pid=ImgDetMain" alt="Perfume">
+        <select id="perfumeSelect" onchange="updateImage('perfumeSelect', 'perfumeImg')">
+          <option value="low" data-cost="500" data-img="https://th.bing.com/th/id/OIP.TxWKUXkkUc8cCk1BGQxNcQHaHa?rs=1&pid=ImgDetMain">Low Quality - RS 500</option>
+          <option value="medium" data-cost="1200" data-img="https://th.bing.com/th/id/OIP.WBdBEyM5mFlP1_ht7TuScwHaFI?rs=1&pid=ImgDetMain">Medium Quality - RS 1200</option>
+          <option value="high" data-cost="2000" data-img="https://fimgs.net/mdimg/secundar/o.68105.jpg">High Quality - RS 2000</option>
+        </select>
+        <button class="buy-btn" onclick="addItem('perfumeSelect')">Buy It</button>
+      </div>
+    </div>
+      
+    </div>
+
+    <div class="total-cost" id="totalCost">Total Cost: RS 0</div>
+    <button id="checkoutBtn" onclick="checkout()">Checkout</button>
+    <button id="undoBtn" onclick="undoLastPurchase()">Undo the Last Purchase</button>
+  </div>
+
+  <script>
+    let totalCost = 0;
+    let lastAddedCost = 0;
+
+    function updateImage(selectId, imgId) {
+      const selectElement = document.getElementById(selectId);
+      const selectedOption = selectElement.options[selectElement.selectedIndex];
+      const imgElement = document.getElementById(imgId);
+      imgElement.src = selectedOption.getAttribute('data-img');
+    }
+
+    function addItem(selectId) {
+      const selectElement = document.getElementById(selectId);
+      const selectedOption = selectElement.options[selectElement.selectedIndex];
+      const itemCost = parseInt(selectedOption.getAttribute('data-cost'));
+      lastAddedCost = itemCost; // Store the cost of the last added item
+      totalCost += itemCost;
+      document.getElementById('totalCost').textContent = `Total Cost: RS ${totalCost}`;
+    }
+
+    function undoLastPurchase() {
+      if (lastAddedCost > 0) {
+        totalCost -= lastAddedCost;
+        document.getElementById('totalCost').textContent = `Total Cost: RS ${totalCost}`;
+        lastAddedCost = 0; // Reset lastAddedCost after undoing
+      } else {
+        alert("No item to undo!");
+      }
+    }
+
+    function checkout() {
+      localStorage.setItem('totalCost', totalCost); // Save the total cost in local storage
+      window.location.href = 'summary2.html'; // Redirect to the summary page
+    }
+  </script>
+</body>
+</html>

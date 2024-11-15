@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Literacy Game - Final Decision</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+      background-image: url('https://static.vecteezy.com/system/resources/previews/011/027/445/original/skill-and-money-make-or-control-decision-concept-business-man-hold-skill-and-money-choose-your-decision-illustration-vector.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    h1 {
+      color: #333333;
+      margin-bottom: 20px;
+    }
+
+    .summary-section p {
+      font-size: 18px;
+      color: #555555;
+      margin: 10px 0;
+    }
+
+    .summary-section strong {
+      color: #007bff;
+    }
+
+    .remaining {
+      font-size: 20px;
+      margin: 20px 0;
+    }
+
+    .remaining .success {
+      color: #28a745;
+    }
+
+    .remaining .error {
+      color: #dc3545;
+    }
+
+    #sendBtn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+    }
+
+    #sendBtn:hover {
+      background-color: #0056b3;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .message.success {
+      color: #28a745;
+      animation: bounceIn 0.6s ease;
+    }
+
+    .message.error {
+      color: #dc3545;
+      animation: shake 0.6s ease;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes bounceIn {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Final Decision</h1>
+
+    <div class="summary-section">
+      <p>Remaining Purse from Groceries: <strong>RS <span id="remainingFromGrocery">0</span></strong></p>
+      <p>Amount Spent on Shopping: <strong>RS <span id="spentShopping">0</span></strong></p>
+    </div>
+
+    <div class="remaining">
+      Final Savings: <span id="finalSavings">0</span>
+    </div>
+
+    <button id="sendBtn">Send Rs 3500</button>
+
+    <div id="feedbackMessage" class="message"></div>
+  </div>
+
+  <script>
+    // Get values from localStorage
+    const remainingFromGrocery = parseInt(localStorage.getItem('remainingPurse')) || 0;
+    const spentOnShopping = parseInt(localStorage.getItem('totalCost')) || 0;
+
+    // Display values on the summary page
+    document.getElementById('remainingFromGrocery').innerText = remainingFromGrocery;
+    document.getElementById('spentShopping').innerText = spentOnShopping;
+
+    // Calculate the final savings
+    let finalSavings = remainingFromGrocery - spentOnShopping;
+
+    // Display final savings
+    if (finalSavings >= 0) {
+      document.getElementById('finalSavings').innerHTML = `<span class="success">RS ${finalSavings}</span>`;
+    } else {
+      document.getElementById('finalSavings').innerHTML = `<span class="error">RS ${finalSavings} (Overspent!)</span>`;
+    }
+
+    // Store the final savings in localStorage for future use
+    localStorage.setItem('finalSavings', finalSavings);
+
+    // Button click event
+    document.getElementById('sendBtn').addEventListener('click', function() {
+      const feedbackMessage = document.getElementById('feedbackMessage');
+
+      if (finalSavings >= 3500) {
+        feedbackMessage.innerHTML = "Money Sent! You did a great job by controlling your urge to spend and you did very good planning.";
+        feedbackMessage.classList.add('success');
+      } else {
+        feedbackMessage.innerHTML = "Unable to save money: <br> 1. You exceeded your budget, which highlights the impact of impulsive spending. <br> 2. Focus on setting clear priorities and staying committed to your savings goals. <br>But do not worry. You will learn things. All the best champ!";
+        feedbackMessage.classList.add('error');
+      }
+      this.style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>

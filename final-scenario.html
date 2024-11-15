@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Scenario</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+      background-image: url('https://cdn4.vectorstock.com/i/1000x1000/37/33/problem-is-businessman-car-broke-down-vector-10613733.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    h1 {
+      color: #333333;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555555;
+      margin: 15px 0;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    #fatherAvatar {
+      background-image: url('https://img.favpng.com/16/14/6/computer-icons-father-icon-design-avatar-png-favpng-ez30PgSepb86bKFMRvE8Dbkb1.jpg'); /* Replace with actual image URL */
+    }
+
+    #studentAvatar {
+      background-image: url('https://cdn4.iconfinder.com/data/icons/avatar-man-colored-outline/2930/Artist-man-boy-avatar-User-preson-people-black-skin-512.png'); /* Replace with actual image URL */
+    }
+
+    .bubble {
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: left;
+      margin: 10px 0;
+      position: relative;
+    }
+
+    .bubble::before {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 10px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent transparent #007bff transparent;
+    }
+
+    .typing {
+      font-family: monospace;
+      color: #333;
+    }
+
+    #nextBtn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #nextBtn:hover {
+      background-color: #0056b3;
+    }
+
+    #conversation {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Emergency Scenario</h1>
+
+    <!-- Initial scenario description -->
+    <div id="initialText">
+      <p><strong>EMERGENCY SCENARIO:</strong> You've exited the shopping store. Suddenly, your phone rings. You glance at the screen and see it's your father calling. You answer the call, and the conversation goes like this:</p>
+    </div>
+
+    <!-- Conversation section -->
+    <div id="conversation">
+      <div id="avatarContainer">
+        <div id="avatar" class="avatar"></div>
+      </div>
+      <div id="dialogue" class="bubble"></div>
+    </div>
+
+    <!-- Next button to proceed through conversation -->
+    <button id="nextBtn">Next</button>
+  </div>
+
+  <script>
+    // Text for conversation with avatars
+    const conversationLines = [
+      { text: 'Father: "Hey, I need your help. My car just broke down on the highway, and I\'m stuck."', avatar: 'father' },
+      { text: 'You: "Oh no! Are you okay? What happened?"', avatar: 'student' },
+      { text: 'Father: "Yeah, I’m fine, but the car\'s engine just stopped working. Can you send me 3500 Rupees?"', avatar: 'father' },
+      { text: 'You: "Of course! Just send me UPI ID and I’ll send the money right away."', avatar: 'student' }
+    ];
+
+    let currentLine = 0;
+
+    const initialText = document.getElementById('initialText');
+    const conversation = document.getElementById('conversation');
+    const dialogue = document.getElementById('dialogue');
+    const avatar = document.getElementById('avatar');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // Typing effect function with fixes
+    function typeEffect(text, index = 0) {
+      if (index === 0) {
+        dialogue.innerHTML = '';  // Clear the dialogue box at the start
+      }
+
+      if (index < text.length) {
+        dialogue.innerHTML += text.charAt(index);
+        setTimeout(() => typeEffect(text, index + 1), 50);
+      }
+    }
+
+    // Function to update avatar and dialogue
+    function updateConversation() {
+      const currentLineData = conversationLines[currentLine];
+      dialogue.innerHTML = ''; // Clear previous text
+
+      if (currentLineData.avatar === 'father') {
+        avatar.style.backgroundImage = 'url("https://img.favpng.com/16/14/6/computer-icons-father-icon-design-avatar-png-favpng-ez30PgSepb86bKFMRvE8Dbkb1.jpg")'; // Replace with actual image URL
+      } else {
+        avatar.style.backgroundImage = 'url("https://cdn4.iconfinder.com/data/icons/avatar-man-colored-outline/2930/Artist-man-boy-avatar-User-preson-people-black-skin-512.png")'; // Replace with actual image URL
+      }
+
+      typeEffect(currentLineData.text);
+    }
+
+    // Next button click event
+    nextBtn.addEventListener('click', function() {
+      if (currentLine === 0) {
+        initialText.style.display = 'none';
+        conversation.style.display = 'block';
+      }
+
+      if (currentLine < conversationLines.length) {
+        updateConversation();
+        currentLine++;
+      } else {
+        nextBtn.innerText = 'Proceed';
+        nextBtn.disabled = true;
+
+        // Redirect to the next page where user will send money
+        setTimeout(() => {
+          window.location.href = 'send-money.html'; // Change 'send-money.html' to your actual savings page URL
+        }, 1000);
+      }
+    });
+  </script>
+
+</body>
+</html>
